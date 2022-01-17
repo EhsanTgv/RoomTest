@@ -13,14 +13,21 @@
         <action
             android:id="@+id/action_listFragment_to_addFragment"
             app:destination="@id/addFragment" />
+        <action
+            android:id="@+id/action_listFragment_to_updateFragment"
+            app:destination="@id/updateFragment" />
     </fragment>
     <fragment
         android:id="@+id/addFragment"
         android:name="com.taghavi.roomtest.fragments.add.AddFragment"
         android:label="fragment_add"
-        tools:layout="@layout/fragment_add">
-        <action
-            android:id="@+id/action_addFragment_to_listFragment"
-            app:destination="@id/listFragment" />
+        tools:layout="@layout/fragment_add" />
+    <fragment
+        android:id="@+id/updateFragment"
+        android:name="com.taghavi.roomtest.fragments.update.UpdateFragment"
+        android:label="UpdateFragment">
+        <argument
+            android:name="currentUser"
+            app:argType="com.taghavi.roomtest.model.User" />
     </fragment>
 </navigation>

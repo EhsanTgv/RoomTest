@@ -1,9 +1,12 @@
-package com.taghavi.roomtest.data
+package com.taghavi.roomtest.viewModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.viewModelScope
+import com.taghavi.roomtest.data.UserDatabase
+import com.taghavi.roomtest.repository.UserRepository
+import com.taghavi.roomtest.model.User
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
@@ -20,6 +23,12 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
     fun addUser(user: User) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.addUser(user)
+        }
+    }
+
+    fun updateUser(user: User) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateUser(user)
         }
     }
 }

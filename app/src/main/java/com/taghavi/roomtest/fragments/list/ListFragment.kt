@@ -6,11 +6,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.taghavi.roomtest.data.UserViewModel
+import com.taghavi.roomtest.viewModel.UserViewModel
 import com.taghavi.roomtest.databinding.FragmentListBinding
 
 class ListFragment : Fragment() {

@@ -2,8 +2,9 @@ package com.taghavi.roomtest.fragments.list
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
-import com.taghavi.roomtest.data.User
+import com.taghavi.roomtest.model.User
 import com.taghavi.roomtest.databinding.ItemRowBinding
 
 class ListAdapter(private val userList: List<User>) :
@@ -20,6 +21,11 @@ class ListAdapter(private val userList: List<User>) :
             firstName.text = userList[position].firstName
             lastName.text = userList[position].lastName
             age.text = userList[position].age.toString()
+
+            root.setOnClickListener { view ->
+                view.findNavController()
+                    .navigate(ListFragmentDirections.actionListFragmentToUpdateFragment(userList[position]))
+            }
         }
     }
 
