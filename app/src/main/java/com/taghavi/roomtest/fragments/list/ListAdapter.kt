@@ -21,6 +21,8 @@ class ListAdapter(private val userList: List<User>) :
             firstName.text = userList[position].firstName
             lastName.text = userList[position].lastName
             age.text = userList[position].age.toString()
+            address.text =
+                "${userList[position].address.streetName}/${userList[position].address.streetNumber}"
 
             root.setOnClickListener { view ->
                 view.findNavController()

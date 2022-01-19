@@ -12,6 +12,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.taghavi.roomtest.R
 import com.taghavi.roomtest.databinding.FragmentUpdateBinding
+import com.taghavi.roomtest.model.Address
 import com.taghavi.roomtest.model.User
 import com.taghavi.roomtest.viewModel.UserViewModel
 
@@ -45,9 +46,13 @@ class UpdateFragment : Fragment() {
         val firstName = binding.firstName.text.toString()
         val lastName = binding.lastName.text.toString()
         val age = binding.age.text
+        val streetName = binding.streetName.text.toString()
+        val streetNumber = binding.streetNumber.text
 
-        if (inputCheck(firstName, lastName, age)) {
-            val updatedUser = User(args.currentUser.id, firstName, lastName, age.toString().toInt())
+        if (inputCheck(firstName, lastName, age, streetName, streetNumber)) {
+            val address = Address(streetName, streetNumber.toString().toInt())
+            val updatedUser =
+                User(args.currentUser.id, firstName, lastName, age.toString().toInt(), address)
             viewModel.updateUser(updatedUser)
             Toast.makeText(requireContext(), "Updated successfully!", Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
@@ -57,8 +62,19 @@ class UpdateFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(firstName: String, lastName: String, age: Editable): Boolean {
-        return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName) && age.isEmpty())
+    private fun inputCheck(
+        firstName: String,
+        lastName: String,
+        age: Editable,
+        streetName: String,
+        streetNumber: Editable
+    ): Boolean {
+        return !(
+                TextUtils.isEmpty(firstName) &&
+                        TextUtils.isEmpty(lastName) &&
+                        age.isEmpty() &&
+                        TextUtils.isEmpty(streetName) &&
+                        streetNumber.isEmpty())
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {

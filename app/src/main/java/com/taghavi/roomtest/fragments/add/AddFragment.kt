@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.taghavi.roomtest.model.User
 import com.taghavi.roomtest.viewModel.UserViewModel
 import com.taghavi.roomtest.databinding.FragmentAddBinding
+import com.taghavi.roomtest.model.Address
 
 class AddFragment : Fragment() {
     private lateinit var binding: FragmentAddBinding
@@ -36,9 +37,13 @@ class AddFragment : Fragment() {
         val firstName = binding.firstName.text.toString()
         val lastName = binding.lastName.text.toString()
         val age = binding.age.text
+        val streetName = binding.streetName.text.toString()
+        val streetNumber = binding.streetNumber.text
 
-        if (inputCheck(firstName, lastName, age)) {
-            val user = User(0, firstName, lastName, age.toString().toInt())
+        if (inputCheck(firstName, lastName, age, streetName, streetNumber)) {
+            val address = Address(streetName, streetNumber.toString().toInt())
+            val user =
+                User(0, firstName, lastName, age.toString().toInt(), address)
             viewModel.addUser(user)
             Toast.makeText(requireContext(), "Successfully added!", Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()
@@ -48,7 +53,18 @@ class AddFragment : Fragment() {
         }
     }
 
-    private fun inputCheck(firstName: String, lastName: String, age: Editable): Boolean {
-        return !(TextUtils.isEmpty(firstName) && TextUtils.isEmpty(lastName) && age.isEmpty())
+    private fun inputCheck(
+        firstName: String,
+        lastName: String,
+        age: Editable,
+        streetName: String,
+        streetNumber: Editable
+    ): Boolean {
+        return !(
+                TextUtils.isEmpty(firstName) &&
+                        TextUtils.isEmpty(lastName) &&
+                        age.isEmpty() &&
+                        TextUtils.isEmpty(streetName) &&
+                        streetNumber.isEmpty())
     }
 }
