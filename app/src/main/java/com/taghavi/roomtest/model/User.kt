@@ -1,5 +1,6 @@
 package com.taghavi.roomtest.model
 
+import android.graphics.Bitmap
 import android.os.Parcelable
 import androidx.room.Embedded
 import androidx.room.Entity
@@ -15,7 +16,8 @@ data class User(
     val lastName: String,
     val age: Int,
     @Embedded
-    val address: Address
+    val address: Address,
+    val picture: Bitmap
 ) : Parcelable
 
 @Parcelize

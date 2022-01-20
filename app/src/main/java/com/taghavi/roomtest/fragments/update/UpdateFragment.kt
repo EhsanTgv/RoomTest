@@ -1,11 +1,13 @@
 package com.taghavi.roomtest.fragments.update
 
 import android.app.AlertDialog
+import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextUtils
 import android.view.*
 import android.widget.Toast
+import androidx.core.graphics.drawable.toBitmap
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -32,6 +34,8 @@ class UpdateFragment : Fragment() {
         binding.firstName.setText(args.currentUser.firstName)
         binding.lastName.setText(args.currentUser.lastName)
         binding.age.setText(args.currentUser.age.toString())
+        binding.streetName.setText(args.currentUser.address.streetName)
+        binding.streetNumber.setText(args.currentUser.address.streetNumber.toString())
 
         binding.updateButton.setOnClickListener {
             updateItem()
@@ -49,10 +53,20 @@ class UpdateFragment : Fragment() {
         val streetName = binding.streetName.text.toString()
         val streetNumber = binding.streetNumber.text
 
+        val myDrawable = resources.getDrawable(R.mipmap.ic_launcher)
+        val picture = myDrawable.toBitmap()
+
         if (inputCheck(firstName, lastName, age, streetName, streetNumber)) {
             val address = Address(streetName, streetNumber.toString().toInt())
             val updatedUser =
-                User(args.currentUser.id, firstName, lastName, age.toString().toInt(), address)
+                User(
+                    args.currentUser.id,
+                    firstName,
+                    lastName,
+                    age.toString().toInt(),
+                    address,
+                    picture
+                )
             viewModel.updateUser(updatedUser)
             Toast.makeText(requireContext(), "Updated successfully!", Toast.LENGTH_SHORT).show()
             findNavController().popBackStack()

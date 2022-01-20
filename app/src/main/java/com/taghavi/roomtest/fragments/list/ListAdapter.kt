@@ -17,7 +17,7 @@ class ListAdapter(private val userList: List<User>) :
     override fun onBindViewHolder(holder: RecyclerView.ViewHolder, position: Int) {
         val viewHolder = holder as ItemViewHolder
         with(viewHolder.viewBinding) {
-            id.text = userList[position].id.toString()
+            image.setImageBitmap(userList[position].picture)
             firstName.text = userList[position].firstName
             lastName.text = userList[position].lastName
             age.text = userList[position].age.toString()
