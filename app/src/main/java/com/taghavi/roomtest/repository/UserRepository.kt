@@ -3,6 +3,7 @@ package com.taghavi.roomtest.repository
 import androidx.lifecycle.LiveData
 import com.taghavi.roomtest.data.UserDao
 import com.taghavi.roomtest.model.User
+import kotlinx.coroutines.flow.Flow
 
 class UserRepository(private val userDao: UserDao) {
 
@@ -22,5 +23,9 @@ class UserRepository(private val userDao: UserDao) {
 
     suspend fun deleteAllUsers() {
         userDao.deleteAllUsers()
+    }
+
+    fun searchDatabase(searchQuery: String): Flow<List<User>> {
+        return userDao.searchDatabase(searchQuery)
     }
 }

@@ -3,6 +3,7 @@ package com.taghavi.roomtest.viewModel
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
+import androidx.lifecycle.asLiveData
 import androidx.lifecycle.viewModelScope
 import com.taghavi.roomtest.data.UserDatabase
 import com.taghavi.roomtest.repository.UserRepository
@@ -42,5 +43,9 @@ class UserViewModel(application: Application) : AndroidViewModel(application) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.deleteAllUsers()
         }
+    }
+
+    fun searchDatabase(searchQuery: String): LiveData<List<User>> {
+        return repository.searchDatabase(searchQuery).asLiveData()
     }
 }
